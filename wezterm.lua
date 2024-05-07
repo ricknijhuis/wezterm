@@ -1,10 +1,13 @@
 -- Pull in the wezterm API
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
+local launch = require("config.launch")
+local key_bindings = require("config.key_bindings")
 
--- This will hold the configuration.
 local config = wezterm.config_builder()
 
-config.default_prog = {'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe', '-NoLogo'}
-config.color_scheme = 'rose-pine'
-config.disable_default_key_bindings = true
+launch.apply(config)
+key_bindings.apply(config)
+
+config.color_scheme = "rose-pine"
+
 return config
