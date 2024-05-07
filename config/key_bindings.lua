@@ -18,6 +18,19 @@ function module.apply(config)
 	config.leader = { key = "Space", mods = mod.SUPER_REV }
 
 	config.keys = {
+		{
+			key = "c",
+			mods = "LEADER",
+			action = act.CloseCurrentPane({ confirm = true }),
+		},
+		{
+			key = "n",
+			mods = "LEADER",
+			action = act.ActivateKeyTable({
+				name = "spawn_pane",
+				one_shot = false,
+			}),
+		},
 		-- CTRL+SHIFT+Space, followed by 'r' will put us in resize-pane
 		-- mode until we cancel that mode.
 		{
@@ -42,6 +55,22 @@ function module.apply(config)
 	}
 
 	config.key_tables = {
+		spawn_pane = {
+			{ key = "LeftArrow", action = act.SplitPane({ direction = "Left", size = { Percent = 50 } }) },
+			{ key = "h", action = act.SplitPane({ direction = "Left", size = { Percent = 50 } }) },
+
+			{ key = "RightArrow", action = act.SplitPane({ direction = "Right", size = { Percent = 50 } }) },
+			{ key = "l", action = act.SplitPane({ direction = "Right", size = { Percent = 50 } }) },
+
+			{ key = "UpArrow", action = act.SplitPane({ direction = "Up", size = { Percent = 50 } }) },
+			{ key = "k", action = act.SplitPane({ direction = "Up", size = { Percent = 50 } }) },
+
+			{ key = "DownArrow", action = act.SplitPane({ direction = "Down", size = { Percent = 50 } }) },
+			{ key = "j", action = act.SplitPane({ direction = "Down", size = { Percent = 50 } }) },
+
+			-- Cancel the mode by pressing escape
+			{ key = "Escape", action = "PopKeyTable" },
+		},
 		-- Defines the keys that are active in our resize-pane mode.
 		-- Since we're likely to want to make multiple adjustments,
 		-- we made the activation one_shot=false. We therefore need
@@ -80,6 +109,8 @@ function module.apply(config)
 
 			{ key = "DownArrow", action = act.ActivatePaneDirection("Down") },
 			{ key = "j", action = act.ActivatePaneDirection("Down") },
+
+			{ key = "Escape", action = "PopKeyTable" },
 		},
 	}
 end
