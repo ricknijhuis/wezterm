@@ -1,4 +1,3 @@
--- Pull in the wezterm API
 local wezterm = require("wezterm")
 local launch = require("config.launch")
 local key_bindings = require("config.key_bindings")
